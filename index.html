@@ -1,617 +1,72 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>小白和大脸猫的幸福生活</title>
-<meta name="author" content="Codrops" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<style>
-.alsp{
-	font-family:"楷体";
-}
-</style>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Audio playbackRate Example</title>  
 </head>
 <body>
-
-
-<div class="content">
-
-  <center>
-    <br>
-    <br>
-    <font size="+3" class="alsp">小白和大脸猫的幸福生活</font>
-	<br />
-  </center>
-  <div id="showtime" style="color:#cc33cc;font-size:18px" align="center"></div>
-  <script type="text/javascript">
-		// 对Date的扩展，将 Date 转化为指定格式的String
-		// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-		// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-		// 例子： 
-		// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-		// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-		Date.prototype.Format = function (fmt) { //author: meizz 
-			var o = {
-				"M+": this.getMonth() + 1, //月份 
-				"d+": this.getDate(), //日 
-				"h+": this.getHours(), //小时 
-				"m+": this.getMinutes(), //分 
-				"s+": this.getSeconds(), //秒 
-				"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-				"S": this.getMilliseconds() //毫秒 
-			};
-			if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-			for (var k in o)
-			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-			return fmt;
-		}
-		/* 
-        * 获得时间差,时间格式为 年-月-日 小时:分钟:秒 或者 年/月/日 小时：分钟：秒 
-        * 其中，年月日为全格式，例如 ： 2010-10-12 01:00:00 
-        * 返回精度为：秒，分，小时，天
-        */
-
-        function GetDateDiff(startTime, endTime) {
-            //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式 
-            startTime = startTime.replace(/\-/g, "/");
-            endTime = endTime.replace(/\-/g, "/");
-
-          
-            var sTime = new Date(startTime);      //开始时间
-            var eTime = new Date(endTime);  //结束时间
-			var defTime = eTime.getTime() - sTime.getTime();
-            var days = Math.floor(defTime / (24 * 3600 * 1000));//计算天数
-			var leave1 = defTime % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
-			var hours = Math.floor(leave1 / (3600 * 1000));//计算小时数
-			var leave2= leave1 % (3600 * 1000);      //计算小时数后剩余的毫秒数
-			var minutes = Math.floor(leave2 / (60*1000));
-			var leave3 = leave2 % (60 * 1000);      //计算分钟数后剩余的毫秒数
-			var seconds = Math.round(leave3 / 1000);
-			document.getElementById("showtime").innerHTML = "幸福时光共计:" + days + "天" + hours + "小时"
-			+ minutes + "分" + seconds + "秒";
-        }
-		
-		function showTime() {
-			GetDateDiff("2015-03-22 23:00:00", new Date().Format("yyyy-MM-dd hh:mm:ss"));
-		}
-		setInterval(showTime, 1000);
-</script>
-
-  <pre id="showwords" style="color:#ff00cc;font-size:15px"></pre>
-  <div style="display:none" id="words">
-  This is our story, a love story... About u, about me, about us❤ 
-  </div>
-  <script language="javascript">
-		var index=0;
-		var word=document.getElementById("words").innerHTML;
-		function type(){
-			document.getElementById("showwords").innerText = word.substring(0,index++);
-		}
-		setInterval(type, 200);
-	</script>
-  <header> </header>
-  <div class="iw_wrapper">
-    <ul class="iw_thumbs" id="iw_thumbs">
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/1.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/1.jpg" alt="Thumb1"/>
-        <div>
-          <h2>面试</h2>
-          <p>在天津大学的校园招聘会伤，大脸猫正在积极推销自己~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/2.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/2.jpg" alt="Thumb2"/>
-        <div>
-          <h2>外婆家</h2>
-          <p>大脸猫请小白吃外婆家，小白点了一个凉菜，大脸猫点了一个虾子还有西红柿蛋汤，两个人吃得很开心~~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/3.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/3.jpg" alt="Thumb3"/>
-        <div>
-          <h2>外婆家</h2>
-          <p>大脸猫被航联成功录用，再一次决定请小白吃外婆家~~可惜这一次点错了菜，不过两个人还是很开心~~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/8.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/8.jpg" alt="Thumb8"/>
-        <div>
-          <h2>民航大</h2>
-          <p>大脸猫和她的室友一起出去玩，拍了几张艺术照片发给了小白，小白觉得拍得很有感觉~~PS:这是小白第一张微信背景图</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/9.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/9.jpg" alt="Thumb9"/>
-        <div>
-          <h2>美图秀秀</h2>
-          <p>大脸猫用美图秀秀三张照片组合起来了！！！すごい </p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/10.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/10.jpg" alt="Thumb10"/>
-        <div>
-          <h2>新背景</h2>
-          <p>大脸猫觉得小白的微信聊天背景不好看，使用美图秀秀给小白弄了一个好看的照片~~还带上了祝福~PS:这是小白第二张微信背景图</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/6.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/6.jpg" alt="Thumb6"/>
-        <div>
-          <h2>love</h2>
-          <p>在民航大学里面的某个长椅上，小白躺着大脸猫的腿上，很惬意地闭上了眼睛~~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/12.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/12.jpg" alt="Thumb12"/>
-        <div>
-          <h2>海河</h2>
-          <p>又一次两人的即将分离，小白回西青，大脸猫回东丽，两人走之前在天津站海河边上hang out，拍得很好，就是手抖了一下~~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/4.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/4.jpg" alt="Thumb4"/>
-        <div>
-          <h2>亚惠</h2>
-          <p>在北京的亚惠美食广场，小白很惊讶地看着大脸猫吃光了一盘西红柿鸡蛋炒面！小白表示特别喜欢看大脸猫吃饭~~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/5.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/5.jpg" alt="Thumb5"/>
-        <div>
-          <h2>CUBA</h2>
-          <p>CUBA篮球赛在民航大学举办，小白去找大脸猫一起看了北京大学VS天津工业大学的比赛，哇，当时两个人都好年轻~~~以后也要一直年轻！</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/11.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/11.jpg" alt="Thumb11"/>
-        <div>
-          <h2>宝贝儿</h2>
-          <p>大脸猫知道小白喜欢踢球，所以毕业时特地拍了一张照片给小白~PS：这是小白手机上第二张锁屏壁纸</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/14.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/14.jpg" alt="Thumb3"/>
-        <div>
-          <h2>北京南站</h2>
-          <p>大脸猫陪小白一起回天津，在北京南站拍得，脸色很好看，小白很喜欢这张~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/13.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/13.jpg" alt="Thumb13"/>
-        <div>
-          <h2>地铁站</h2>
-          <p>小白在51book体验工作，大脸猫去给她伯伯买礼物，然后两人忙完后在5号线某一站约好见面了~PS：这是小白的微信第三张背景图</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/15.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/15.jpg" alt="Thumb14"/>
-        <div>
-          <h2>天桥</h2>
-          <p>大脸猫第二个周末又一次来滨海新区看望小白，两个人走在天桥上，小白牵着大脸猫的手。小白表示要一直牵着大脸猫的手，永不言弃。</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/16.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/16.jpg" alt="Thumb1"/>
-        <div>
-          <h2>美人儿</h2>
-          <p>小白叫大脸猫发几张自拍照，然后大脸猫发了一张躺着床上的照片，小白觉得这张照片非常美。PS:这是小白第三张锁屏壁纸。</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/18.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/18.jpg" alt="Thumb2"/>
-        <div>
-          <h2>大脸猫</h2>
-          <p>大脸猫虽然脸大，但是其实都是玩笑话，其实只是大脸猫的脸是圆的，所以显着有些大而已~~小白觉得大脸猫怎么弄都很好看，都很喜欢~</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/17.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/17.jpg" alt="Thumb11"/>
-        <div>
-          <h2>干瞪眼</h2>
-          <p>小白和大脸猫来到MSD附近的亚惠美食广场，在等石锅拌饭的时候，小白瞪了大脸猫一眼被拍下来了~大脸猫摆出了胜利的手势。</p>
-        </div>
-      </li>
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/19.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/19.jpg" alt="Thumb12"/>
-        <div>
-          <h2>四连拍</h2>
-          <p>小白很想大脸猫，所以再一次要求大脸猫发自拍照，结果大脸猫发了张特别有意思的四连拍~~</p>
-        </div>
-      </li>    
-	   <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/20.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/20.jpg" alt="Thumb12"/>
-        <div>
-          <h2>塘沽外滩</h2>
-          <p>为了纪念抗日战争胜利70周年，大脸猫和小白特地去塘沽外滩视察工作！</p>
-        </div>
-      </li> 
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/21.png" data-img="http://7xofl9.com1.z0.glb.clouddn.com/20.png" alt="Thumb12"/>
-        <div>
-          <h2>塘沽外滩</h2>
-          <p>外滩风貌~天蓝蓝的~水蓝蓝的~心情美美的~</p>
-        </div>
-      </li> 
-      <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/22.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/22.jpg" alt="Thumb12"/>
-        <div>
-          <h2>credit cards</h2>
-          <p>第一次办信用卡，很新鲜~给你一张~给我一张~</p>
-        </div>
-      </li> 
-     <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/23.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/23.jpg" alt="Thumb12"/>
-        <div>
-          <h2>四部曲</h2>
-          <p>前三部的矜持都是为了最后一部的强吻！</p>
-        </div>
-      </li> 
-     <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/24.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/24.jpg" alt="Thumb12"/>
-        <div>
-          <h2>GET OUT, BAD MOOD</h2>
-          <p>滚蛋吧，肿瘤君~这部电影很励志！把我们都看哭了！请小公举和他的女朋友乐观地生活！</p>
-        </div>
-      </li> 
-	    <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/25.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/25.jpg" alt="Thumb12"/>
-        <div>
-          <h2>小公举的大手</h2>
-          <p>这次，小公举提议的拍照手法得到了上级的肯定~</p>
-        </div>
-      </li> 
-        <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/26.jpg" data-img="http://7xofl9.com1.z0.glb.clouddn.com/26.jpg" alt="Thumb12"/>
-        <div>
-          <h2>我的小手</h2>
-          <p>为了达到最佳效果，我们也是很拼的~总共也拍了近百张吧~</p>
-        </div>
-      </li> 
-        <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/27.JPG" data-img="http://7xofl9.com1.z0.glb.clouddn.com/27.JPG" alt="Thumb12"/>
-        <div style="width:810px">
-          <h2>也许可以作为真迹的留存</h2>
-          <p>中秋节前夕，去798溜达~~~的意外收获。支出RMB50让某非著名漫画家给画了幅“结婚照”。该照片除了生动地将我的脸型暴露无遗之外，与我们俩几乎没什么关系。因为完全看不出是我俩。呵呵。不过还是留存吧~万一这人火了呢？？？更何况这是我们的第一张官方合照~</p>
-        </div>
-      </li> 
-	   <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/28.JPG" data-img="http://7xofl9.com1.z0.glb.clouddn.com/28.JPG" alt="Thumb28"/>
-        <div>
-          <h2>与小宝栗子有关的大象</h2>
-          <p>天气慢慢变冷了，其实变冷并不是关键，关键是牵手去买小宝栗子呀~</p>
-        </div>
-      </li>
-	    <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/29.JPG" data-img="http://7xofl9.com1.z0.glb.clouddn.com/29.JPG" alt="Thumb29"/>
-        <div>
-          <h2>地坛门票，2元一张，走过路过不要错过</h2>
-          <p>听闻北京一绝当属深秋银杏大道，欣然前往，不负所望~</p>
-        </div>
-      </li>
-	   <li><img src="http://7xofl9.com1.z0.glb.clouddn.com/30.JPG" data-img="http://7xofl9.com1.z0.glb.clouddn.com/30.JPG" alt="Thumb30"/>
-        <div>
-          <h2>我们在地坛</h2>
-          <p>合照，某一位已经算是很给面子了</p>
-        </div>
-      </li>
-    </ul> 
-  </div>
-    
-  
-
-
-  <div id="iw_ribbon" class="iw_ribbon"> <span class="iw_close"></span> <span class="iw_zoom">close</span> </div>
-	
-
-
-
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ljlovehf1314" data-title="小白和大脸猫的点点滴滴" data-url="http://1.lovehf.sinaapp.com/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"lovehf"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
+<div>
+  <audio id="audio1" style="width:25%" controls>Canvas not supported</audio>
+</div>
+<div>
+<input type="text" id="audioFile" value="mp3/01.民法168金题讲解（一）.mp3" size="60" />
 
 </div>
+  <button id="playbutton" onclick="togglePlay();">Play</button>  
+  <button onclick="increaseSpeed();">Increase speed</button>
+  <button onclick="decreaseSpeed();">Decrease speed</button><br />
+  <div id="rate"></div>
 
-<script src="js/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery.masonry.min.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript">
+     <script type="text/javascript">
+       // Create a couple of global variables to use. 
+       var audioElm = document.getElementById("audio1"); // Audio element
+       var ratedisplay = document.getElementById("rate"); // Rate display area
 
-/*
+       // Hook the ratechange event and display the current playbackRate after each change
+       audioElm.addEventListener("ratechange", function () {
+         ratedisplay.innerHTML = "Rate: " + audioElm.playbackRate;
+       }, false);
 
-何芳是我老婆，何芳是我老婆，何芳是我老婆，重要的事情说三遍
+       //  Alternates between play and pause based on the value of the paused property
+       function togglePlay() {
+         if (document.getElementById("audio1")) {
 
-我是何芳老公，我是何芳老公，我是何芳老公！！！！！
+           if (audioElm.paused == true) {
+             playAudio(audioElm);    //  if player is paused, then play the file
+           } else {
+             pauseAudio(audioElm);   //  if player is playing, then pause
+           }
+         }
+       }
 
-我要跟何芳结婚，以后一起好好生活!
+       function playAudio(audioElm) {
+         document.getElementById("playbutton").innerHTML = "Pause"; // Set button text == Pause
+         // Get file from text box and assign it to the source of the audio element 
+         audioElm.src = document.getElementById('audioFile').value;
+         audioElm.play();
+       }
 
-希望以后的日子越来越好~
+       function pauseAudio(audioElm) {
+         document.getElementById("playbutton").innerHTML = "play"; // Set button text == Play
+         audioElm.pause();
+       }
 
-HF is my dear~ We will live the life together！
+       // Increment playbackRate by 1 
+       function increaseSpeed() {
+         audioElm.playbackRate += 1;
+       }
 
-*/
-			$(window).load(function(){
-				var $iw_thumbs			= $('#iw_thumbs'),
-					$iw_ribbon			= $('#iw_ribbon'),
-					$iw_ribbon_close	= $iw_ribbon.children('span.iw_close'),
-					$iw_ribbon_zoom		= $iw_ribbon.children('span.iw_zoom');
-					
-					ImageWall	= (function() {
-							// window width and height
-						var w_dim,
-						    // index of current image
-							current				= -1,
-							isRibbonShown		= false,
-							isFullMode			= false,
-							// ribbon / images animation settings
-							ribbonAnim			= {speed : 500, easing : 'easeOutExpo'},
-							imgAnim				= {speed : 400, easing : 'jswing'},
-							// init function : call masonry, calculate window dimentions, initialize some events
-							init				= function() {
-								$iw_thumbs.imagesLoaded(function(){
-									$iw_thumbs.masonry({
-										isAnimated	: true
-									});
-								});
-								getWindowsDim();
-								initEventsHandler();
-							},
-							// calculate window dimentions
-							getWindowsDim		= function() {
-								w_dim = {
-									width	: $(window).width(),
-									height	: $(window).height()
-								};
-							},
-							// initialize some events
-							initEventsHandler	= function() {
-								
-								// click on a image
-								$iw_thumbs.delegate('li', 'click', function() {
-									if($iw_ribbon.is(':animated')) return false;
-									
-									var $el = $(this);
-									
-									if($el.data('ribbon')) {
-										showFullImage($el);
-									}
-									else if(!isRibbonShown) {
-										isRibbonShown = true;
-										
-										$el.data('ribbon',true);
-										
-										// set the current
-										current = $el.index();
-									
-										showRibbon($el);
-									}
-								});
-								
-								// click ribbon close
-								$iw_ribbon_close.bind('click', closeRibbon);
-								
-								// on window resize we need to recalculate the window dimentions
-								$(window).bind('resize', function() {
-											getWindowsDim();
-											if($iw_ribbon.is(':animated'))
-												return false;
-											closeRibbon();
-										 })
-								         .bind('scroll', function() {
-											if($iw_ribbon.is(':animated'))
-												return false;
-											closeRibbon();
-										 });
-								
-							},
-							showRibbon			= function($el) {
-								var	$img	= $el.children('img'),
-									$descrp	= $img.next();
-								
-								// fadeOut all the other images
-								$iw_thumbs.children('li').not($el).animate({opacity : 0.2}, imgAnim.speed);
-								
-								// increase the image z-index, and set the height to 100px (default height)
-								$img.css('z-index', 100)
-									.data('originalHeight',$img.height())
-									.stop()
-									.animate({
-										height 		: '100px'
-									}, imgAnim.speed, imgAnim.easing);
-								
-								// the ribbon will animate from the left or right
-								// depending on the position of the image
-								var ribbonCssParam 		= {
-										top	: $el.offset().top - $(window).scrollTop() - 6 + 'px'
-									},
-									descriptionCssParam,
-									dir;
-								
-								if( $el.offset().left < (w_dim.width / 2) ) {
-									dir = 'left';
-									ribbonCssParam.left 	= 0;
-									ribbonCssParam.right 	= 'auto';
-								}
-								else {
-									dir = 'right';
-									ribbonCssParam.right 	= 0;
-									ribbonCssParam.left 	= 'auto';
-								}
-								
-								$iw_ribbon.css(ribbonCssParam)
-								          .show()
-										  .stop()
-										  .animate({width : '100%'}, ribbonAnim.speed, ribbonAnim.easing, function() {
-												switch(dir) {
-													case 'left' :
-														descriptionCssParam		= {
-															'left' 			: $img.outerWidth(true) + 'px',
-															'text-align' 	: 'left'
-														};
-														break;
-													case 'right' :	
-														descriptionCssParam		= {
-															'left' 			: '-200px',
-															'text-align' 	: 'right'
-														};
-														break;
-												};
-												$descrp.css(descriptionCssParam).fadeIn();
-												// show close button and zoom
-												$iw_ribbon_close.show();
-												$iw_ribbon_zoom.show();
-										  });
-								
-							},
-							// close the ribbon
-							// when in full mode slides in the middle of the page
-							// when not slides left
-							closeRibbon			= function() {
-								isRibbonShown 	= false
-								
-								$iw_ribbon_close.hide();
-								$iw_ribbon_zoom.hide();
-								
-								if(!isFullMode) {
-								
-									// current wall image
-									var $el	 		= $iw_thumbs.children('li').eq(current);
-									
-									resetWall($el);
-									
-									// slide out ribbon
-									$iw_ribbon.stop()
-											  .animate({width : '0%'}, ribbonAnim.speed, ribbonAnim.easing); 
-										  
-								}
-								else {
-									$iw_ribbon.stop().animate({
-										opacity		: 0.8,
-										height 		: '0px',
-										marginTop	: w_dim.height/2 + 'px' // half of window height
-									}, ribbonAnim.speed, function() {
-										$iw_ribbon.css({
-											'width'		: '0%',
-											'height'	: '126px',
-											'margin-top': '0px'
-										}).children('img').remove();
-									});
-									
-									isFullMode	= false;
-								}
-							},
-							resetWall			= function($el) {
-								var $img		= $el.children('img'),
-									$descrp		= $img.next();
-									
-								$el.data('ribbon',false);
-								
-								// reset the image z-index and height
-								$img.css('z-index',1).stop().animate({
-									height 		: $img.data('originalHeight')
-								}, imgAnim.speed,imgAnim.easing);
-								
-								// fadeOut the description
-								$descrp.fadeOut();
+       // Cut playback rate in half
+       function decreaseSpeed() {
+         if (audioElm.playbackRate <= 1) {
+           var temp = audioElm.playbackRate;
+           audioElm.playbackRate = (temp / 2); 
+         } else {
+           audioElm.playbackRate -= 1;
+         }
+       }
 
-								// fadeIn all the other images
-								$iw_thumbs.children('li').not($el).animate({opacity : 1}, imgAnim.speed);								
-							},
-							showFullImage		= function($el) {
-								isFullMode	= true;
-								
-								$iw_ribbon_close.hide();
-								
-								var	$img	= $el.children('img'),
-									large	= $img.data('img'),
-								
-									// add a loading image on top of the image
-									$loading = $('<span class="iw_loading"></span>');
-								
-								$el.append($loading);
-								
-								// preload large image
-								$('<img/>').load(function() {
-									var $largeImage	= $(this);
-									
-									$loading.remove();
-									
-									$iw_ribbon_zoom.hide();
-									
-									resizeImage($largeImage);
-									
-									// reset the current image in the wall
-									resetWall($el);
-									
-									// animate ribbon in and out
-									$iw_ribbon.stop().animate({
-										opacity		: 1,
-										height 		: '0px',
-										marginTop	: '63px' // half of ribbons height
-									}, ribbonAnim.speed, function() {
-										// add the large image to the DOM
-										$iw_ribbon.prepend($largeImage);
-										
-										$iw_ribbon_close.show();
-										
-										$iw_ribbon.animate({
-											height 		: '100%',
-											marginTop	: '0px',
-											top			: '0px'
-										}, ribbonAnim.speed);
-									});
-								}).attr('src',large);
-									
-							},
-							resizeImage			= function($image) {
-								var widthMargin		= 100,
-									heightMargin 	= 100,
-								
-									windowH      	= w_dim.height - heightMargin,
-									windowW      	= w_dim.width - widthMargin,
-									theImage     	= new Image();
-									
-								theImage.src     	= $image.attr("src");
-								
-								var imgwidth     	= theImage.width,
-									imgheight    	= theImage.height;
-
-								if((imgwidth > windowW) || (imgheight > windowH)) {
-									if(imgwidth > imgheight) {
-										var newwidth 	= windowW,
-											ratio 		= imgwidth / windowW,
-											newheight 	= imgheight / ratio;
-											
-										theImage.height = newheight;
-										theImage.width	= newwidth;
-										
-										if(newheight > windowH) {
-											var newnewheight 	= windowH,
-												newratio 		= newheight/windowH,
-												newnewwidth 	= newwidth/newratio;
-										
-											theImage.width 		= newnewwidth;
-											theImage.height		= newnewheight;
-										}
-									}
-									else {
-										var newheight 	= windowH,
-											ratio 		= imgheight / windowH,
-											newwidth 	= imgwidth / ratio;
-										
-										theImage.height = newheight;
-										theImage.width	= newwidth;
-										
-										if(newwidth > windowW) {
-											var newnewwidth 	= windowW,
-											    newratio 		= newwidth/windowW,
-												newnewheight 	= newheight/newratio;
-									
-											theImage.height 	= newnewheight;
-											theImage.width		= newnewwidth;
-										}
-									}
-								}
-									
-								$image.css({
-									'width'			: theImage.width + 'px',
-									'height'		: theImage.height + 'px',
-									'margin-left'	: -theImage.width / 2 + 'px',
-									'margin-top'	: -theImage.height / 2 + 'px'
-								});							
-							};
-							
-						return {init : init};	
-					})();
-				
-				ImageWall.init();
-			});
-		</script>
+     </script>
 
 
 </body>
-</html>
+</html
